@@ -1,0 +1,94 @@
+# ===============================
+# ✅ QUERY (truy vấn dữ liệu)
+# ===============================
+type Query {
+  # Lấy toàn bộ sản phẩm
+  products: [Product!]!
+
+  # Lấy tất cả sản phẩm sắp xếp theo giá tăng dần
+  productsSortedByPrice: [Product!]!
+
+  # Lấy sản phẩm theo Category ID
+  productsByCategory(categoryId: ID!): [Product!]!
+
+  # Lấy tất cả user
+  users: [User!]!
+
+  # Lấy tất cả category
+  categories: [Category!]!
+
+  # Lấy 1 user theo ID
+  userById(id: ID!): User
+
+  # Lấy 1 category theo ID
+  categoryById(id: ID!): Category
+}
+
+# ===============================
+# ✅ MUTATION (CRUD thao tác dữ liệu)
+# ===============================
+type Mutation {
+  # ---------- USER ----------
+  createUser(fullname: String!, email: String!, password: String!, phone: String): User
+  updateUser(id: ID!, fullname: String, phone: String): User
+  deleteUserGraphql(id: ID!): Boolean
+
+  # ---------- CATEGORY ----------
+  createCategory(name: String!, images: String): Category
+  updateCategory(id: ID!, name: String, images: String): Category
+  deleteCategoryGraphql(id: ID!): Boolean
+
+  # ---------- PRODUCT ----------
+  createProduct(
+    title: String!,
+    quantity: Int,
+    description: String,
+    price: Float,
+    ownerId: ID,
+    categoryId: ID
+  ): Product
+
+  updateProduct(
+    id: ID!,
+    title: String,
+    quantity: Int,
+    description: String,
+    price: Float,
+    ownerId: ID,
+    categoryId: ID
+  ): Product
+
+  deleteProductGraphql(id: ID!): Boolean
+}
+
+# ===============================
+# ✅ TYPES (mô tả bảng dữ liệu)
+# ===============================
+
+type User {
+  id: ID!
+  fullname: String
+  email: String
+  password: String
+  phone: String
+  categories: [Category]
+  products: [Product]
+}
+
+type Category {
+  id: ID!
+  name: String
+  images: String
+  users: [User]
+  products: [Product]
+}
+
+type Product {
+  id: ID!
+  title: String
+  quantity: Int
+  description: String
+  price: Float
+  owner: User
+  category: Category
+}
