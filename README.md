@@ -34,7 +34,9 @@ Tham khảo tài liệu trong file đính kèm:
 
 ## Đường dẫn truy cập
 
-[http://localhost:8081/login](http://localhost:8081/ui/login)
+[http://localhost:8081/login](http://localhost:8081/login)
+email: kha@gmail.com
+mk: 123456
 
 ---
 
